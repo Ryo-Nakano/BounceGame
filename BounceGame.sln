@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio for Mac
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BounceGame", "BounceGame.csproj", "{3878C57E-DE88-B9DC-DE60-D0DFBCAB96EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3878C57E-DE88-B9DC-DE60-D0DFBCAB96EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3878C57E-DE88-B9DC-DE60-D0DFBCAB96EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3878C57E-DE88-B9DC-DE60-D0DFBCAB96EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3878C57E-DE88-B9DC-DE60-D0DFBCAB96EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
