@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
 
-	public Vector2 playerSpeed = new Vector2(0.05f, 0.05f);
-	Rigidbody2D rb2d;
 	[SerializeField] float speed;
 	[SerializeField] float bounciness;
 
+	Rigidbody2D rb2d;
 	ManagerScript ms;
-
 	RectTransform rt;
 
 	// Use this for initialization
@@ -28,15 +26,13 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 
-    //ReceTransform使って移動させてみる
+	//Playerの移動(ReceTransform使って移動)
 	void Move()
 	{
 		if(ms.isPlaying == true)
 		{
 			//x軸方向の入力(左右)を拾う(-1 < x < 1)
             float x = Input.GetAxisRaw("Horizontal");
-            //Debug.Log("x : " + x);
-
             rt.localPosition += new Vector3(x * speed * Time.deltaTime, 0, 0);
 		}
         
@@ -48,10 +44,11 @@ public class PlayerScript : MonoBehaviour {
 	{
         if (col.gameObject.tag == "Ground")
         {
-            rb2d.velocity = new Vector2(0, bounciness);
+            rb2d.velocity = new Vector2(0, bounciness);//上方向の速度ベクトルを直接ぶち込む
         }
 	}
 
+    //Itemに当たった時の処理
 	private void OnTriggerEnter2D(Collider2D col)
 	{
 		if(col.gameObject.tag == "Item")

@@ -25,7 +25,6 @@ public class ManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		GameManager();
-
 	}
 
 	void GameManager()
@@ -38,6 +37,7 @@ public class ManagerScript : MonoBehaviour {
 			if (remain <= 0)//item無くなったら
             {
                 isPlaying = false;
+				Debug.Log("isPlaying == false");
 				clearText.text = "C L E A R";
             }
 		}
