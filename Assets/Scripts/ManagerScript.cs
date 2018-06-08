@@ -10,6 +10,7 @@ public class ManagerScript : MonoBehaviour {
 	public Text remainText;
 	[SerializeField] Text timeText;
 	[SerializeField] Text clearText;
+	[SerializeField] Button startButton;
 
 	[SerializeField] GameObject items;
 
@@ -45,11 +46,11 @@ public class ManagerScript : MonoBehaviour {
 		{
 			if (Input.GetKeyDown("space") == true)
             {
-                isPlaying = true;//spaceが押されたらisPlayingをtrueに
-                Debug.Log("isPlaying == true");
-                infoText.text = "";
-                remainText.text = "Remain : " + remain;
-                items.gameObject.SetActive(true);
+                //isPlaying = true;//spaceが押されたらisPlayingをtrueに
+                //Debug.Log("isPlaying == true");
+                //infoText.text = "";
+                //remainText.text = "Remain : " + remain;
+                //items.gameObject.SetActive(true);
             }
 		}
 	}
@@ -64,5 +65,19 @@ public class ManagerScript : MonoBehaviour {
         items.gameObject.SetActive(false);
 
         remain = items.transform.childCount;//itemの数を変数remainに格納！
+	}
+
+    //Startボタン押された時に呼ばれる
+	public void StartButton()
+	{
+		Debug.Log("StartButtonPushed!!");
+
+		isPlaying = true;//spaceが押されたらisPlayingをtrueに
+        Debug.Log("isPlaying == true");
+        infoText.text = "";
+        remainText.text = "Remain : " + remain;
+        items.gameObject.SetActive(true);
+
+		startButton.gameObject.SetActive(false);//button押されたら無効化
 	}
 }
