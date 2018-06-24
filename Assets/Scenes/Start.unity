@@ -349,7 +349,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Time :'
+  m_Text: 
 --- !u!222 &233395849
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -948,7 +948,7 @@ Prefab:
     - target: {fileID: 224424013368594890, guid: ac106c7dd0ca44d28a1a7c7b8546b85d,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224424013368594890, guid: ac106c7dd0ca44d28a1a7c7b8546b85d,
         type: 2}
@@ -1094,7 +1094,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Remain:'
+  m_Text: 
 --- !u!222 &587629192
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1246,7 +1246,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: C L E A R
+  m_Text: 
 --- !u!222 &706804464
 CanvasRenderer:
   m_ObjectHideFlags: 0
