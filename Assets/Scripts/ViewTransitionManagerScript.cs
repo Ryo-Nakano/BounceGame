@@ -8,8 +8,10 @@ public class ViewTransitionManagerScript : MonoBehaviour {
 	[SerializeField] GameObject view2;//View2をUnityからアタッチ
 	Animator animator;//取得したAnimatorを格納しておく為の変数
 
-	[SerializeField] Text changeSkinText;
-	[SerializeField] Text tapToStartText;
+	[SerializeField] GameObject changeSkinText;
+	[SerializeField] GameObject tapToStartText;
+	[SerializeField] GameObject rankingDataText;
+	[SerializeField] GameObject playerStatus;
 
 	// Use this for initialization
 	void Start () {
@@ -24,8 +26,10 @@ public class ViewTransitionManagerScript : MonoBehaviour {
     //View2に遷移する為の関数
 	public void GoToView2()
 	{
-		changeSkinText.gameObject.SetActive(false);
-		tapToStartText.gameObject.SetActive(false);
+		changeSkinText.SetActive(false);
+		tapToStartText.SetActive(false);
+		rankingDataText.SetActive(false);
+		playerStatus.SetActive(false);
 		animator.SetBool("running", true);
 		Debug.Log("GoToView2");
 	}
@@ -34,8 +38,10 @@ public class ViewTransitionManagerScript : MonoBehaviour {
 	public void BackToView1()
     {
 		animator.SetBool("running", false);
-		changeSkinText.gameObject.SetActive(true);
-        tapToStartText.gameObject.SetActive(true);
+		changeSkinText.SetActive(true);
+        tapToStartText.SetActive(true);
+		rankingDataText.SetActive(true);
+		playerStatus.SetActive(true);
 		Debug.Log("BackToView1");
     }
 }
