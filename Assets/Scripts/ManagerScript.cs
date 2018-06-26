@@ -12,7 +12,12 @@ public class ManagerScript : MonoBehaviour {
 	[SerializeField] Text clearText;
 	[SerializeField] Button startButton;
 
-	[SerializeField] GameObject items;
+	[SerializeField] GameObject gems;
+	[SerializeField] GameObject gem;//Instantiateする為にUnityからアタッチ
+
+    //gemをランダム生成する時に使う変数
+	int rangeX = 825;
+	int rangeY = 325;
 
 	public int remain;//残りアイテム数
 
@@ -20,7 +25,8 @@ public class ManagerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		init();
+		GenerateGems();//Gemをランダムに12個生成
+		init();//各種初期化
 	}
 	
 	// Update is called once per frame
@@ -42,17 +48,6 @@ public class ManagerScript : MonoBehaviour {
 				clearText.text = "C L E A R";
             }
 		}
-		else//isPlaying == false
-		{
-			if (Input.GetKeyDown("space") == true)
-            {
-                //isPlaying = true;//spaceが押されたらisPlayingをtrueに
-                //Debug.Log("isPlaying == true");
-                //infoText.text = "";
-                //remainText.text = "Remain : " + remain;
-                //items.gameObject.SetActive(true);
-            }
-		}
 	}
 
     //色々初期化
@@ -62,9 +57,8 @@ public class ManagerScript : MonoBehaviour {
         remainText.text = "";
         timeText.text = "";
         clearText.text = "";
-        items.gameObject.SetActive(false);
-
-        remain = items.transform.childCount;//itemの数を変数remainに格納！
+        
+		remain = gems.transform.childCount;//itemの数を変数remainに格納！
 	}
 
     //Startボタン押された時に呼ばれる
@@ -72,12 +66,24 @@ public class ManagerScript : MonoBehaviour {
 	{
 		Debug.Log("StartButtonPushed!!");
 
+		gems.SetActive(true);//生成後、無効化にしていたgemsを有効化
 		isPlaying = true;//spaceが押されたらisPlayingをtrueに
         Debug.Log("isPlaying == true");
         infoText.text = "";
         remainText.text = "Remain : " + remain;
-        items.gameObject.SetActive(true);
 
 		startButton.gameObject.SetActive(false);//button押されたら無効化
+	}
+
+	//Gemを12個生成する関数(場所ランダム)
+	void GenerateGems()
+	{
+		for (int i = 0; i < 12; i++)//12回回す
+		{
+			GameObject obj = Instantiate(gem) as GameObject;//gemを生成→GameObject型にキャスト→変数oblに格納
+			obj.transform.SetParent(gems.transform);//生成したgemの親としてgemsを指定
+			obj.transform.localPosition = new Vector2(Random.Range(-rangeX, rangeX) ,Random.Range(-rangeY, rangeY));
+		}
+		gems.SetActive(false);//gem12個生成後、gemsを一旦無効化
 	}
 }
