@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.34901962, g: 0.2509804, b: 0.20784314, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2455,7 +2455,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2126102460}
-        m_MethodName: ChangePlayerColor10
+        m_MethodName: ChangePlayerColor1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3587,7 +3587,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2126102460}
-        m_MethodName: ChangePlayerColor1
+        m_MethodName: ChangePlayerColor10
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4011,7 +4011,7 @@ GameObject:
   - component: {fileID: 830897239}
   - component: {fileID: 830897238}
   m_Layer: 5
-  m_Name: Content1
+  m_Name: Content10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4031,7 +4031,7 @@ RectTransform:
   - {fileID: 1813799098}
   - {fileID: 713295863}
   m_Father: {fileID: 1881310812}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6064,7 +6064,7 @@ GameObject:
   - component: {fileID: 1681751098}
   - component: {fileID: 1681751097}
   m_Layer: 5
-  m_Name: Content10
+  m_Name: Content1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6084,7 +6084,7 @@ RectTransform:
   - {fileID: 38657448}
   - {fileID: 467935988}
   m_Father: {fileID: 1881310812}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6711,7 +6711,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 830897237}
+  - {fileID: 1681751096}
   - {fileID: 491366978}
   - {fileID: 1218821818}
   - {fileID: 315843497}
@@ -6720,7 +6720,7 @@ RectTransform:
   - {fileID: 692432298}
   - {fileID: 65764786}
   - {fileID: 35544522}
-  - {fileID: 1681751096}
+  - {fileID: 830897237}
   m_Father: {fileID: 833969117}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

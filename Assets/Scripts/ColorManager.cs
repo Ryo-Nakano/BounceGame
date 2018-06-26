@@ -11,7 +11,7 @@ public class ColorManager : MonoBehaviour {
 	Image playerStatusImage;
 
 	//変更する色を格納しておく為の変数
-	Color color1 = new Color(0f, 195f/255f, 16f/255f, 1f);
+	Color color1 = new Color(255f / 255f, 0f / 255f, 0f / 255f, 1f);
 	Color color2 = new Color(233f/255f, 147f/255f, 0f, 1f);
 	Color color3 = new Color(243f/255f, 52f/255f, 255f/255f, 1f);
 	Color color4 = new Color(125f/255f, 59f/255f, 255f, 1f);
@@ -20,7 +20,7 @@ public class ColorManager : MonoBehaviour {
 	Color color7 = new Color(209f/ 255f, 233f/ 255f, 0f, 1f);
 	Color color8 = new Color(127f/ 255f, 0f, 56f/ 255f, 1f);
 	Color color9 = new Color(155f/ 255f, 0f, 139f/ 255f, 1f);
-	Color color10 = new Color(89f/ 255f, 64f/ 255f, 53f/ 255f, 1f);
+	Color color10 = new Color(0f, 195f / 255f, 16f / 255f, 1f);
 
 
 
