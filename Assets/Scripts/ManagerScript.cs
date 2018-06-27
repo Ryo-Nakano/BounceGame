@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ManagerScript : MonoBehaviour
 {
@@ -141,6 +142,14 @@ public class ManagerScript : MonoBehaviour
 		startButton.gameObject.SetActive(false);//button押されたら無効化
 		changeSkinButton.gameObject.SetActive(false);//ChangeSkinButton無効化
 		rankingDataButton.gameObject.SetActive(false);//RankingDataButton無効化
+	}
+
+    //Restartボタン押された時に呼ばれる関数
+	public void RestartButton()
+	{
+		Debug.Log("RestartButton");
+		int sceneIndex = SceneManager.GetActiveScene().buildIndex;//現在のシーン番号取得
+        SceneManager.LoadScene(sceneIndex);//現在のシーン再ロード"
 	}
 
 	//Gemを12個生成する関数(場所ランダム)
