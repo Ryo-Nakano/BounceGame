@@ -8,11 +8,14 @@ public class ManagerScript : MonoBehaviour
 
 	public bool isPlaying;//ゲームプレイ可能かどうかのフラグ
 	bool isResult;//Result画面に行くかどうかのフラグ
+	bool gameStart;
 
 	[SerializeField] Text infoText;
 	public Text remainText;
 	[SerializeField] Text timeText;
 	[SerializeField] Text clearText;
+	[SerializeField] Text countdownText;
+	float countdownTimer = 3.0f;
 
 	[SerializeField] Button startButton;
 	[SerializeField] Button changeSkinButton;
@@ -51,19 +54,41 @@ public class ManagerScript : MonoBehaviour
 
 	void GameManager()
 	{
-		if (isPlaying == true)
+		if (gameStart == true)
 		{
-			timer += Time.deltaTime;//タイマー開始
-			timeText.text = "Time : " + timer.ToString("f2");
-			remainText.text = "Remain : " + remain;
-
-
-			if (remain <= 0)//item無くなったら
+			countdownTimer -= Time.deltaTime;//カウントダウン開始
+			if(countdownTimer > 2.0f)
 			{
-				isPlaying = false;
-				Debug.Log("isPlaying == false");
-				clearText.text = "C L E A R";
-				isResult = true;
+				countdownText.text = "3";
+			}
+			else if(countdownTimer <= 2.0f && countdownTimer > 1.0)
+			{
+				countdownText.text = "2";
+			}
+			else if (countdownTimer <= 1.0f && countdownTimer > 0f)
+            {
+                countdownText.text = "1";
+            }
+			else//countdownTimer < 0の時
+			{
+				isPlaying = true;
+				if(isPlaying == true)
+				{
+					gems.SetActive(true);//生成後、無効化にしていたgemsを有効化
+                    countdownText.text = "";
+                    timer += Time.deltaTime;//タイマー開始
+                    timeText.text = "Time : " + timer.ToString("f2");
+                    remainText.text = "Remain : " + remain;
+
+                    if (remain <= 0)//item無くなったら
+                    {
+                        isPlaying = false;
+						gameStart = false;
+                        Debug.Log("isPlaying == false");
+                        clearText.text = "C L E A R";
+                        isResult = true;
+                    }
+				}
 			}
 		}
 
@@ -93,6 +118,7 @@ public class ManagerScript : MonoBehaviour
 	//色々初期化
 	void init()
 	{
+		gameStart = false;
 		isResult = false;
 		isPlaying = false;//最初はfalse
 		remainText.text = "";
@@ -107,8 +133,7 @@ public class ManagerScript : MonoBehaviour
 	{
 		Debug.Log("StartButtonPushed!!");
 
-		gems.SetActive(true);//生成後、無効化にしていたgemsを有効化
-		isPlaying = true;//spaceが押されたらisPlayingをtrueに
+		gameStart = true;
 		Debug.Log("isPlaying == true");
 		infoText.text = "";
 		remainText.text = "Remain : " + remain;
