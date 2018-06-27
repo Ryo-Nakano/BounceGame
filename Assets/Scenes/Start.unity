@@ -4644,7 +4644,9 @@ MonoBehaviour:
   rankingDataButton: {fileID: 379201635}
   gems: {fileID: 2135305619}
   gem: {fileID: 1473704106662030, guid: d83909d73ddbd4dc4b00351b28f331a7, type: 2}
+  view4: {fileID: 1689979838}
   remain: 0
+  goResultInterval: 3
 --- !u!1 &1208679425
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,9 @@ public class ManagerScript : MonoBehaviour
 	[SerializeField] GameObject gems;
 	[SerializeField] GameObject gem;//Instantiateする為にUnityからアタッチ
 
+	[SerializeField] GameObject view4;//Result画面をUnityからアタッチ
+	Animator view4Animator;//取得したview4のAnimatorを格納しておく為の変数
+
 	//gemをランダム生成する時に使う変数
 	int rangeX = 825;
 	int rangeY = 325;
@@ -29,10 +32,13 @@ public class ManagerScript : MonoBehaviour
 
 	float timer;
 	float resultTimer;//Result画面に移動するタイミングを測るタイマー
+	[SerializeField] float goResultInterval;//何秒後にResultに移行するか決定する変数
 
 	// Use this for initialization
 	void Start()
 	{
+		view4Animator = view4.GetComponent<Animator>();
+
 		GenerateGems();//Gemをランダムに12個生成
 		init();//各種初期化
 	}
@@ -57,12 +63,29 @@ public class ManagerScript : MonoBehaviour
 				isPlaying = false;
 				Debug.Log("isPlaying == false");
 				clearText.text = "C L E A R";
+				isResult = true;
+			}
+		}
 
-				resultTimer += Time.deltaTime;//resultTimerスタート
-				if(resultTimer > 2.0f)//ゲームクリアから一定時間後
-				{
-					isResult = true;
-				}
+		if(isResult == true)
+		{
+			resultTimer += Time.deltaTime;//resultTimerスタート
+
+			if(resultTimer > goResultInterval)//ゲームクリアから一定時間後
+			{
+				//この中のコードは1回だけ呼ばれる！
+				Debug.Log("GoToResult!!");
+
+				remainText.text = "";
+				timeText.text = "";
+				clearText.text = "";
+
+				view4Animator.SetBool("running", true);//Result画面をアニメーション表示
+
+
+
+
+				isResult = false;
 			}
 		}
 	}
@@ -111,9 +134,6 @@ public class ManagerScript : MonoBehaviour
     //Result画面の制御する関数
 	void Result()
 	{ 
-		if(isResult == true)
-		{
-			
-		}
+		
 	}
 }
