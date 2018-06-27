@@ -55,7 +55,6 @@ public class PlayerScript : MonoBehaviour {
 		{
 			Destroy(col.gameObject);
 			ms.remain--;
-			ms.remainText.text = "Remain : " + ms.remain;
 		}
 	}
 }
