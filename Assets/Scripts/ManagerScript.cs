@@ -32,6 +32,8 @@ public class ManagerScript : MonoBehaviour
 	[SerializeField] Text bestTimeText;
 	[SerializeField] Text lastTimeText;
 
+	ViewTransitionManagerScript viewTransitionManagerScript;
+
 	//gemをランダム生成する時に使う変数
 	int rangeX = 825;
 	int rangeY = 325;
@@ -48,6 +50,8 @@ public class ManagerScript : MonoBehaviour
 		view4Animator = view4.GetComponent<Animator>();
 		dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
 
+		viewTransitionManagerScript = GameObject.Find("ViewTransitionManager").GetComponent<ViewTransitionManagerScript>();
+
 		GenerateGems();//Gemをランダムに12個生成
 		init();//各種初期化
 
@@ -55,7 +59,10 @@ public class ManagerScript : MonoBehaviour
 		dataManager.PlayCount();//Play回数計算(playCount)
 		dataManager.CulculateClerTime();//Clear時間系計算(sum, ave)
 		dataManager.FindBestTime();//BestTime拾ってくる(bestTime)
-		dataManager.SaveNCMB();
+		dataManager.SaveNCMB();//NCMBにSave
+
+		PlayerPrefs.DeleteKey("isFirst");
+		CheckIsFirst();//初回起動かどうかをチェックする関数
 	}
 
 	// Update is called once per frame
@@ -180,4 +187,21 @@ public class ManagerScript : MonoBehaviour
 	{ 
 		
 	}
+
+
+	//初回起動かどうかを判定する関数
+	int isFirst = 0;//初回起動かどうかを判断するフラグ(0→初回起動, 1→2回目以降)
+
+	void CheckIsFirst()
+    {
+        if (PlayerPrefs.HasKey("isFirst") == false)//初回起動の時
+        {
+            Debug.Log("初回！");
+			viewTransitionManagerScript.GoToView5();
+            //backToMenuButton.gameObject.SetActive(false);//戻るボタンを非アクティブに(UserName決めるまでゲーム始められない)
+            //firstTimeText.text = "先ずはメロスに名付けろ！";
+            isFirst = 1;
+            PlayerPrefs.SetInt("isFirst", isFirst);
+        }
+    }
 }

@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\DataManager.cs" />
     <Compile Include="Assets\Scripts\ManagerScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
+    <Compile Include="Assets\Scripts\ProfileManager.cs" />
     <Compile Include="Assets\Scripts\ViewTransitionManagerScript.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/ryohei/Desktop/GeekSalonUnityProjects/BounceGame/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
