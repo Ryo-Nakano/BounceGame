@@ -28,13 +28,15 @@ public class ManagerScript : MonoBehaviour
 	[SerializeField] GameObject view4;//Result画面をUnityからアタッチ
 	Animator view4Animator;//取得したview4のAnimatorを格納しておく為の変数
 
+	DataManager dataManager;
+
 	//gemをランダム生成する時に使う変数
 	int rangeX = 825;
 	int rangeY = 325;
 
 	public int remain;//残りアイテム数
 
-	float timer;
+	public float timer;
 	float resultTimer;//Result画面に移動するタイミングを測るタイマー
 	[SerializeField] float goResultInterval;//何秒後にResultに移行するか決定する変数
 
@@ -42,6 +44,7 @@ public class ManagerScript : MonoBehaviour
 	void Start()
 	{
 		view4Animator = view4.GetComponent<Animator>();
+		dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
 
 		GenerateGems();//Gemをランダムに12個生成
 		init();//各種初期化
@@ -85,7 +88,6 @@ public class ManagerScript : MonoBehaviour
                     {
                         isPlaying = false;
 						gameStart = false;
-                        Debug.Log("isPlaying == false");
                         clearText.text = "C L E A R";
                         isResult = true;
                     }
@@ -100,11 +102,13 @@ public class ManagerScript : MonoBehaviour
 			if(resultTimer > goResultInterval)//ゲームクリアから一定時間後
 			{
 				//この中のコードは1回だけ呼ばれる！
-				Debug.Log("GoToResult!!");
-
 				remainText.text = "";
 				timeText.text = "";
 				clearText.text = "";
+
+				//ここでCSVの計算とかすればいいかな？
+				dataManager.AddRow(timer);//timerの値を引数にとって、AddRowを呼ぶ！
+				dataManager.Save();//PlayLogにプレイデータの保存！
 
 				view4Animator.SetBool("running", true);//Result画面をアニメーション表示
 
@@ -132,10 +136,7 @@ public class ManagerScript : MonoBehaviour
 	//Startボタン押された時に呼ばれる
 	public void StartButton()
 	{
-		Debug.Log("StartButtonPushed!!");
-
 		gameStart = true;
-		Debug.Log("isPlaying == true");
 		infoText.text = "";
 		remainText.text = "Remain : " + remain;
 
@@ -147,7 +148,6 @@ public class ManagerScript : MonoBehaviour
     //Restartボタン押された時に呼ばれる関数
 	public void RestartButton()
 	{
-		Debug.Log("RestartButton");
 		int sceneIndex = SceneManager.GetActiveScene().buildIndex;//現在のシーン番号取得
         SceneManager.LoadScene(sceneIndex);//現在のシーン再ロード"
 	}
