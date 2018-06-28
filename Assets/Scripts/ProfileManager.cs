@@ -34,21 +34,31 @@ public class ProfileManager : MonoBehaviour
             if (inputField.text.Length <= 6)//文字数6文字以下の時
             {
                 if (inputField.text == "うんこ" ||
+			       inputField.text == "Unko" ||
+			       inputField.text == "unko" ||
                    inputField.text == "ちんこ" ||
                    inputField.text == "まんこ" ||
                    inputField.text == "おっぱい" ||
                    inputField.text == "死ね")
                 {
-                    alertText.text = "『秩序が乱れる。やめい。』";
+                    alertText.text = "No. Please.";
                 }
-                else if (inputField.text == "セリヌン")
+				else if (inputField.text == "まちだ" ||
+                         inputField.text == "たかしま" ||
+				         inputField.text == "半蔵門")
                 {
-                    alertText.text = "『セリヌン...？ お前まさか...！！』";
+                    alertText.text = "『テックスタジアム！！』";
                 }
                 else if (inputField.text == "青野" ||
                          inputField.text == "りょーすけ")
                 {
                     alertText.text = "『それは顔面。』";
+                }
+				else if (inputField.text == "Meros" ||
+                         inputField.text == "メロス" ||
+                         inputField.text == "めろす")//メロスの時
+                {
+                    alertText.text = "『あれは駄作。』";
                 }
                 else//秩序を乱さない入力内容だった時
                 {
@@ -64,7 +74,7 @@ public class ProfileManager : MonoBehaviour
                         else
                         {
                             //値の更新
-                            objList[0]["UserName"] = inputField.text;//プレイ総数
+                            objList[0]["UserName"] = inputField.text;
                             Debug.Log("inputField2 : " + inputField.text);
                             objList[0].SaveAsync();//変更内容のsave
                             inputField.text = "";//空白に直す
@@ -77,12 +87,7 @@ public class ProfileManager : MonoBehaviour
             }
             else//文字数6文字より多い時
             {
-                if (inputField.text == "セリヌンティウス" ||
-                   inputField.text == "せりぬんてぃうす")//セリヌンティウスの時
-                {
-                    alertText.text = "『お前まさか...！！』";
-                }
-                else if (inputField.text == "パスタ作ったお前")
+                if (inputField.text == "パスタ作ったお前")
                 {
                     alertText.text = "『まさか...湘南乃風...！？！？』";
                 }
@@ -93,13 +98,13 @@ public class ProfileManager : MonoBehaviour
                 }
                 else
                 {
-                    alertText.text = "『文字数が多すぎるでごわす！』";
+                    alertText.text = "Too Long too Set";
                 }
             }
         }
         else//文字入力してない時
         {
-            alertText.text = "『文字が入力されていないでごわす！』";
+			alertText.text = "No Characters";
         }
     }
 }

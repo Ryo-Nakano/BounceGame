@@ -61,7 +61,7 @@ public class ManagerScript : MonoBehaviour
 		dataManager.FindBestTime();//BestTime拾ってくる(bestTime)
 		dataManager.SaveNCMB();//NCMBにSave
 
-		PlayerPrefs.DeleteKey("isFirst");
+		PlayerPrefs.DeleteKey("isFirst");//Key消して毎回初回起動にしてる【test】
 		CheckIsFirst();//初回起動かどうかをチェックする関数
 	}
 
