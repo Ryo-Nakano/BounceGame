@@ -21,6 +21,7 @@ public class ManagerScript : MonoBehaviour
 	[SerializeField] Button startButton;
 	[SerializeField] Button changeSkinButton;
 	[SerializeField] Button rankingDataButton;
+	[SerializeField] GameObject changeUserNameText;
 
 	[SerializeField] GameObject gems;
 	[SerializeField] GameObject gem;//Instantiateする為にUnityからアタッチ
@@ -33,6 +34,8 @@ public class ManagerScript : MonoBehaviour
 	[SerializeField] Text lastTimeText;
 
 	ViewTransitionManagerScript viewTransitionManagerScript;
+
+	[SerializeField] Button backToMenuButton;//初回起動時だけBackButton無効化する為の変数
 
 	//gemをランダム生成する時に使う変数
 	int rangeX = 825;
@@ -155,11 +158,13 @@ public class ManagerScript : MonoBehaviour
 	{
 		gameStart = true;
 		infoText.text = "";
+		timeText.text = "Time : " + timer.ToString("f2");
 		remainText.text = "Remain : " + remain;
 
 		startButton.gameObject.SetActive(false);//button押されたら無効化
 		changeSkinButton.gameObject.SetActive(false);//ChangeSkinButton無効化
 		rankingDataButton.gameObject.SetActive(false);//RankingDataButton無効化
+		changeUserNameText.SetActive(false);//changeUserNameTextを無効化
 	}
 
     //Restartボタン押された時に呼ばれる関数
@@ -198,7 +203,7 @@ public class ManagerScript : MonoBehaviour
         {
             Debug.Log("初回！");
 			viewTransitionManagerScript.GoToView5();
-            //backToMenuButton.gameObject.SetActive(false);//戻るボタンを非アクティブに(UserName決めるまでゲーム始められない)
+            backToMenuButton.gameObject.SetActive(false);//戻るボタンを非アクティブに(UserName決めるまでゲーム始められない)
             //firstTimeText.text = "先ずはメロスに名付けろ！";
             isFirst = 1;
             PlayerPrefs.SetInt("isFirst", isFirst);

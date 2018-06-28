@@ -16,6 +16,7 @@ public class ViewTransitionManagerScript : MonoBehaviour {
 	[SerializeField] GameObject tapToStartText;
 	[SerializeField] GameObject rankingDataText;
 	[SerializeField] GameObject playerStatus;
+	[SerializeField] GameObject changeUserNameText;
 
 	// Use this for initialization
 	void Start () {
@@ -36,6 +37,7 @@ public class ViewTransitionManagerScript : MonoBehaviour {
 		tapToStartText.SetActive(false);
 		rankingDataText.SetActive(false);
 		playerStatus.SetActive(false);
+		changeUserNameText.SetActive(false);
 		animatorView2.SetBool("running", true);
 		Debug.Log("GoToView2");
 	}
@@ -48,6 +50,7 @@ public class ViewTransitionManagerScript : MonoBehaviour {
         tapToStartText.SetActive(true);
 		rankingDataText.SetActive(true);
 		playerStatus.SetActive(true);
+		changeUserNameText.SetActive(true);
 		Debug.Log("BackToView1");
     }
 
@@ -58,6 +61,7 @@ public class ViewTransitionManagerScript : MonoBehaviour {
         tapToStartText.SetActive(false);
         rankingDataText.SetActive(false);
         playerStatus.SetActive(false);
+		changeUserNameText.SetActive(false);
         animatorView3.SetBool("running", true);
         Debug.Log("GoToView3");
     }
@@ -70,6 +74,7 @@ public class ViewTransitionManagerScript : MonoBehaviour {
         tapToStartText.SetActive(true);
         rankingDataText.SetActive(true);
         playerStatus.SetActive(true);
+		changeUserNameText.SetActive(true);
         Debug.Log("BackToView1");
     }
 
@@ -80,6 +85,7 @@ public class ViewTransitionManagerScript : MonoBehaviour {
         tapToStartText.SetActive(false);
         rankingDataText.SetActive(false);
         playerStatus.SetActive(false);
+		changeUserNameText.SetActive(false);
         animatorView5.SetBool("running", true);
         Debug.Log("GoToView5");
     }
@@ -92,6 +98,7 @@ public class ViewTransitionManagerScript : MonoBehaviour {
         tapToStartText.SetActive(true);
         rankingDataText.SetActive(true);
         playerStatus.SetActive(true);
+		changeUserNameText.SetActive(true);
         Debug.Log("BackToView1");
     }
 }

@@ -12,6 +12,8 @@ public class ProfileManager : MonoBehaviour
 
 	ViewTransitionManagerScript viewTransitionManagerScript;
 
+	[SerializeField] Button backToMenuButton;
+
     // Use this for initialization
     void Start()
     {
@@ -83,6 +85,7 @@ public class ProfileManager : MonoBehaviour
 
 					viewTransitionManagerScript.BackToView1_3();//View5→View1に画面遷移
                     alertText.text = "";//Alertを空白に戻す
+					backToMenuButton.gameObject.SetActive(true);
                 }
             }
             else//文字数6文字より多い時
