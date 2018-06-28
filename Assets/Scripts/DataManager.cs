@@ -75,29 +75,29 @@ public class DataManager : MonoBehaviour
 
         //新しいデータを追加
         array[rowCount, 0] = rowCount.ToString();//id列に追加
-		array[rowCount, 1] = score.ToString();//timeを追加
+		array[rowCount, 1] = score.ToString("f2");//timeを追加(小数点以下第二位まで)
         
         playLog = array;//playLogにarrayを代入→playLog内容の更新！
-
     }
 
 
     //=====================playLogいい感じに拾って来て、いい感じに加工して、いい感じの変数に入れる関数！=====================
 
     //===HighScoreを探してくる===
-    int highScore = 0;//ハイスコアを格納しておく為の変数(初期値0)
+	public float bestTime;//ハイスコアを格納しておく為の変数(初期値0)
 
-    public void FindHighScore()
+    public void FindBestTime()
     {
+		bestTime = 8888f;//一旦クソでかい初期値入れとく
+
         for (int i = 0; i < playLog.GetLength(0) - 1; i++)//playLogの行数-1回だけ回す！
         {
-            if (int.Parse(playLog[i + 1, 1]) > highScore)//参照した値が手元に持ってるhighScoreよりも大きかったとき
+			if (float.Parse(playLog[i + 1, 1]) < bestTime)//参照した値が手元に持ってるbestTimeよりも早かった時
             {
-                highScore = int.Parse(playLog[i + 1, 1]);//highScoreの値を上書き！
+				Debug.Log(float.Parse(playLog[i + 1, 1]));
+				bestTime = float.Parse(playLog[i + 1, 1]);//bestTimeの値を上書き！
             }
         }
-
-        Debug.Log("HighScore : " + highScore);
     }
 
 

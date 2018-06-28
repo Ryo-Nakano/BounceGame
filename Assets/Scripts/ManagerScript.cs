@@ -29,6 +29,8 @@ public class ManagerScript : MonoBehaviour
 	Animator view4Animator;//取得したview4のAnimatorを格納しておく為の変数
 
 	DataManager dataManager;
+	[SerializeField] Text bestTimeText;
+	[SerializeField] Text lastTimeText;
 
 	//gemをランダム生成する時に使う変数
 	int rangeX = 825;
@@ -105,10 +107,15 @@ public class ManagerScript : MonoBehaviour
 				remainText.text = "";
 				timeText.text = "";
 				clearText.text = "";
-
-				//ここでCSVの計算とかすればいいかな？
+                
 				dataManager.AddRow(timer);//timerの値を引数にとって、AddRowを呼ぶ！
 				dataManager.Save();//PlayLogにプレイデータの保存！
+
+				//Result画面への表示ここで！
+				lastTimeText.text = "Last Time : " + timer.ToString("f2");//LastTime表示
+				//BestTime表示
+				dataManager.FindBestTime();//PlayLogからBestTimeを探してくる→変数bestTimeに格納
+				bestTimeText.text = "Best Time : " + dataManager.bestTime;
 
 				view4Animator.SetBool("running", true);//Result画面をアニメーション表示
 
