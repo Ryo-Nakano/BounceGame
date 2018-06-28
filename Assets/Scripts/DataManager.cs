@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;//←これはなんだ？
-//using NCMB;
+using NCMB;
 
 //PlayLogをCSVファイルに貯めておく為のクラス！
 public class DataManager : MonoBehaviour
@@ -83,7 +83,7 @@ public class DataManager : MonoBehaviour
 
     //=====================playLogいい感じに拾って来て、いい感じに加工して、いい感じの変数に入れる関数！=====================
 
-    //===HighScoreを探してくる===
+    //===【完】BestTimeを探してくる===
 	public float bestTime;//ハイスコアを格納しておく為の変数(初期値0)
 
     public void FindBestTime()
@@ -94,7 +94,6 @@ public class DataManager : MonoBehaviour
         {
 			if (float.Parse(playLog[i + 1, 1]) < bestTime)//参照した値が手元に持ってるbestTimeよりも早かった時
             {
-				Debug.Log(float.Parse(playLog[i + 1, 1]));
 				bestTime = float.Parse(playLog[i + 1, 1]);//bestTimeの値を上書き！
             }
         }
@@ -111,68 +110,18 @@ public class DataManager : MonoBehaviour
     }
 
 
-    //===【完】clearCount拾って来る===
-    public int clearCount;//総クリア回数
+    //==========【完】Clear時間系計算する関数==========
+	public float sum;//"合計"プレイ時間
+	public float ave;//"平均"クリアTime
 
-    public void ClearCount()
+	public void CulculateClerTime()
     {
         for (int i = 0; i < playLog.GetLength(0) - 1; i++)
         {//playLogの行数-1回だけ回す！
-            if (int.Parse(playLog[i + 1, 2]) == 1)
-            {//gameClearedの値が1→クリアだった時
-                clearCount++;//clearCountに1づつ足していく
-            }
+			sum += float.Parse(playLog[i + 1, 1]);//プレイ時間合計
         }
-        Debug.Log("clearCount : " + clearCount);
-
-        //データを送る処理
-    }
-
-
-    //==========【完】firstClearPlayCount拾って来る！==========
-
-    int firstClearPlayCount = 0;//初回クリアまでに何回要したか(初期値0)
-    bool gameClear = false;//クリアしたかどうか！(普通はfalse)
-
-    public void CulculateFirstClearCount()
-    {
-        //初回クリアまでの回数計測
-        for (int i = 0; i < playLog.GetLength(0) - 1; i++)
-        {//playLogの行数-1回だけ回す！
-            if (int.Parse(playLog[i + 1, 2]) != 1)
-            {//gameClearedの値が1でない時→クリアでない時
-                firstClearPlayCount++;//1ずつ足していく！
-            }
-            else
-            {//gameClearedの値が1の時→クリアの時
-                gameClear = true;//クリアしたよ！フラグを立てる
-                break;//クリアの時はfor文ぬける！
-            }
-        }
-
-        //ゲーム未クリアの場合のケア
-        if (gameClear == true)
-        {//ゲームクリアしてる時
-         //データを送る処理
-        }
-        //ゲームクリアが保証されている場合にのみデータの送信を行えば、取り敢えずあ大丈夫かな？
-
-        Debug.Log("firstClearPlayCount : " + firstClearPlayCount);
-    }
-
-
-    //==========【完】平均突破Door枚数拾ってくる！==========
-    public float ave;//"平均"ドア突破枚数
-    public float sum;//"合計"ドア突破枚数
-
-    public void PassedDoorCount()
-    {
-        for (int i = 0; i < playLog.GetLength(0) - 1; i++)
-        {//playLogの行数-1回だけ回す！
-            sum += int.Parse(playLog[i + 1, 1]);//突破ドア枚数の合計！
-        }
-        sum = int.Parse((sum / 100).ToString("f0"));//sumの値を100で割る(score→枚数にする為)
-        ave = float.Parse((sum / (playLog.GetLength(0) - 1)).ToString("f2"));//平均突破ドア枚数！
+		sum = float.Parse(sum.ToString("f2"));//変数sumにプレイ時間の合計を格納
+        ave = float.Parse((sum / (playLog.GetLength(0) - 1)).ToString("f2"));//平均クリアTime
 
         Debug.Log("sum" + sum);
         Debug.Log("ave" + ave);
@@ -185,69 +134,65 @@ public class DataManager : MonoBehaviour
     //-*-*- 使うKey一覧 *-*-*
 
     //▶︎PlayCount (総プレイ回数)
-    //▶︎Ave (平均ドア突破枚数)
-    //▶︎Sum (合計ドア突破枚数)
-    //▶︎FirstClearPlayCount (初回クリアまでのプレイ回数)
-    //▶︎ClearCount (クリア回数)
+    //▶︎Ave (平均クリアTime)
+    //▶︎Sum (合計プレイ時間)
+	//▶︎BestTime
 
     //-*-*-*-*-*-*-*-*-*-*-*
 
     //NCMBにplayデータを保存する関数
-    //public void SaveNCMB()
-    //{
-    //    //NCMBObjectのインスタンスを作成→変数ncmbObjに格納
-    //    NCMBObject obj = new NCMBObject("OnlineRanking");//OnlineRankingテーブルのインスタンス作成！
+    public void SaveNCMB()
+    {
+        //NCMBObjectのインスタンスを作成→変数ncmbObjに格納
+        NCMBObject obj = new NCMBObject("OnlineRanking");//OnlineRankingテーブルのインスタンス作成！
 
-    //    if (PlayerPrefs.HasKey("objectId") == true)//objectId持ってた時(2回目以降のセーブの時)
-    //    {
-    //        //Updateの処理
-    //        NCMBQuery<NCMBObject> query = new NCMBQuery<NCMBObject>("OnlineRanking");
-    //        query.WhereEqualTo("objectId", PlayerPrefs.GetString("objectId"));
-    //        query.FindAsync((List<NCMBObject> objList, NCMBException e) => {
-    //            if (e != null)
-    //            {
-    //                //検索失敗時の処理
-    //                Debug.Log("ミスっとるで！");
-    //            }
-    //            else
-    //            {
-    //                //値の更新
-    //                objList[0]["PlayCount"] = playCount;//プレイ総数
-    //                objList[0]["Ave"] = ave;//平均Door突破枚数
-    //                objList[0]["Sum"] = sum;//合計Door突破枚数
-    //                objList[0]["FirstClearPlayCount"] = firstClearPlayCount;//初回クリアまでのプレイ回数
-    //                objList[0]["ClearCount"] = clearCount;//クリア回数
-    //                objList[0]["HighScore"] = highScore;//ハイスコア
-    //                objList[0].SaveAsync();//変更内容のsave
-    //            }
-    //        });
-    //    }
-    //    else//objectId持ってない時(初セーブの時)
-    //    {
-    //        //新しく行追加
-    //        obj.Add("PlayCount", playCount);
-    //        obj.Add("Ave", ave);
-    //        obj.Add("Sum", sum);
-    //        obj.Add("FirstClearPlayCount", firstClearPlayCount);
-    //        obj.Add("ClearCount", clearCount);
+        if (PlayerPrefs.HasKey("objectId") == true)//objectId持ってた時(2回目以降のセーブの時)
+        {
+            //Updateの処理
+            NCMBQuery<NCMBObject> query = new NCMBQuery<NCMBObject>("OnlineRanking");
+            query.WhereEqualTo("objectId", PlayerPrefs.GetString("objectId"));
+            query.FindAsync((List<NCMBObject> objList, NCMBException e) => {
+                if (e != null)
+                {
+                    //検索失敗時の処理
+                    Debug.Log("ミスっとるで！");
+                }
+                else
+                {
+                    //値の更新
+                    objList[0]["PlayCount"] = playCount;//プレイ回数
+                    objList[0]["Ave"] = ave;//平均Door突破枚数
+                    objList[0]["Sum"] = sum;//合計Door突破枚数
+					objList[0]["BestTime"] = bestTime;//ベストタイム
+                    objList[0].SaveAsync();//変更内容のsave
+                }
+            });
+        }
+        else//objectId持ってない時(初セーブの時)
+        {
+            //新しく行追加
+            obj.Add("PlayCount", playCount);
+            obj.Add("Ave", ave);
+            obj.Add("Sum", sum);
+			obj.Add("BestTime", bestTime);
 
-    //        obj.SaveAsync((NCMBException e) => {//eには"例外(exeption)"が入ってる→来たらエラー来なかったらok！    
-    //            if (e != null)//eが空でない時→エラーの時！
-    //            {
-    //                //エラー時の処理
-    //                Debug.Log("NCMB Save Missed!");
-    //            }
-    //            else//eが空の時→成功した時！
-    //            {
-    //                //成功時の処理
-    //                Debug.Log("NCMB Save Completed!!!");
+            obj.SaveAsync((NCMBException e) => {//eには"例外(exeption)"が入ってる→来たらエラー来なかったらok！    
+                if (e != null)//eが空でない時→エラーの時！
+                {
+                    //エラー時の処理
+                    Debug.Log("NCMB Save Missed!");
+                }
+                else//eが空の時→成功した時！
+                {
+                    //成功時の処理
+                    Debug.Log("NCMB Save Completed!!!");
 
-    //                //NCMBObjectのObjectIdを"objectId"キーでPlayerPrefsに保存(次回以降のセーブで同一行のデータを更新していく形にしたい為)
-    //                PlayerPrefs.SetString("objectId", obj.ObjectId);
-    //            }
-    //        });
-    //    }
-    //}
+                    //NCMBObjectのObjectIdを"objectId"キーでPlayerPrefsに保存(次回以降のセーブで同一行のデータを更新していく形にしたい為)
+                    PlayerPrefs.SetString("objectId", obj.ObjectId);
+                }
+            });
+        }
+    }
 }
 
 

@@ -50,6 +50,12 @@ public class ManagerScript : MonoBehaviour
 
 		GenerateGems();//Gemをランダムに12個生成
 		init();//各種初期化
+
+		//NCMB関連の処理
+		dataManager.PlayCount();//Play回数計算(playCount)
+		dataManager.CulculateClerTime();//Clear時間系計算(sum, ave)
+		dataManager.FindBestTime();//BestTime拾ってくる(bestTime)
+		dataManager.SaveNCMB();
 	}
 
 	// Update is called once per frame
@@ -108,20 +114,17 @@ public class ManagerScript : MonoBehaviour
 				timeText.text = "";
 				clearText.text = "";
                 
+                //PlayLogへのデータ蓄積
 				dataManager.AddRow(timer);//timerの値を引数にとって、AddRowを呼ぶ！
 				dataManager.Save();//PlayLogにプレイデータの保存！
 
-				//Result画面への表示ここで！
+				//Result画面への表示
 				lastTimeText.text = "Last Time : " + timer.ToString("f2");//LastTime表示
-				//BestTime表示
 				dataManager.FindBestTime();//PlayLogからBestTimeを探してくる→変数bestTimeに格納
-				bestTimeText.text = "Best Time : " + dataManager.bestTime;
+				bestTimeText.text = "Best Time : " + dataManager.bestTime;//BestTime表示
 
 				view4Animator.SetBool("running", true);//Result画面をアニメーション表示
-
-
-
-
+                
 				isResult = false;
 			}
 		}
