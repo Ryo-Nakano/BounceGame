@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222715688371921606}
   - component: {fileID: 114885580306512544}
   - component: {fileID: 61557358085077342}
+  - component: {fileID: 114849786174335544}
   m_Layer: 5
   m_Name: Gem
   m_TagString: Item
@@ -54,6 +55,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &114849786174335544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473704106662030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc4f917b73234f19916b51fc594a59c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 0}
 --- !u!114 &114885580306512544
 MonoBehaviour:
   m_ObjectHideFlags: 1

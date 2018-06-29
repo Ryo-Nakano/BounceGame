@@ -64,7 +64,7 @@ public class ManagerScript : MonoBehaviour
 		dataManager.FindBestTime();//BestTime拾ってくる(bestTime)
 		dataManager.SaveNCMB();//NCMBにSave
 
-		PlayerPrefs.DeleteKey("isFirst");//Key消して毎回初回起動にしてる【test】
+		//PlayerPrefs.DeleteKey("isFirst");//Key消して毎回初回起動にしてる【test】
 		CheckIsFirst();//初回起動かどうかをチェックする関数
 	}
 
@@ -72,6 +72,7 @@ public class ManagerScript : MonoBehaviour
 	void Update()
 	{
 		GameManager();
+		SpaceKey();
 	}
 
 	void GameManager()
@@ -166,6 +167,23 @@ public class ManagerScript : MonoBehaviour
 		rankingDataButton.gameObject.SetActive(false);//RankingDataButton無効化
 		changeUserNameText.SetActive(false);//changeUserNameTextを無効化
 	}
+
+	//Spaceキー押された時に呼ばれる
+    void SpaceKey()
+    {
+		if(Input.GetKeyDown("space"))
+		{
+			gameStart = true;
+            infoText.text = "";
+            timeText.text = "Time : " + timer.ToString("f2");
+            remainText.text = "Remain : " + remain;
+
+            startButton.gameObject.SetActive(false);//button押されたら無効化
+            changeSkinButton.gameObject.SetActive(false);//ChangeSkinButton無効化
+            rankingDataButton.gameObject.SetActive(false);//RankingDataButton無効化
+            changeUserNameText.SetActive(false);//changeUserNameTextを無効化	
+		}
+    }
 
     //Restartボタン押された時に呼ばれる関数
 	public void RestartButton()
