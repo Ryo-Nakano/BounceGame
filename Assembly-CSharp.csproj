@@ -105,6 +105,7 @@
     <Compile Include="Assets\Scripts\RankingManager.cs" />
     <Compile Include="Assets\Scripts\TabBarScript.cs" />
     <Compile Include="Assets\Scripts\ViewTransitionManagerScript.cs" />
+    <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/ryohei/Desktop/GeekSalonUnityProjects/BounceGame/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
