@@ -53,7 +53,7 @@ public class PlayerScript : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Item")
 		{
-			Destroy(col.gameObject);
+			//Destroy(col.gameObject);
 			ms.remain--;
 		}
 	}

@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GemScript : MonoBehaviour {
+
+	ParticleSystem particle;
+	Image image;
+	BoxCollider2D boxCollider2;
     
-	[SerializeField] GameObject particle;//Gem取得エフェクト
 
 	// Use this for initialization
 	void Start () {
-		
+		particle = this.transform.Find("Destruction01").GetComponent<ParticleSystem>();
+		image = GetComponent<Image>();
+		boxCollider2 = GetComponent<BoxCollider2D>();
 	}
 	
 	// Update is called once per frame
@@ -16,13 +22,15 @@ public class GemScript : MonoBehaviour {
 		
 	}
 
-	private void OnTriggerEnter(Collider col)
+	private void OnTriggerEnter2D(Collider2D col)
 	{
-		Debug.Log("Hello!!");
 		if(col.gameObject.tag == "Player")
 		{
 			Debug.Log("Hit Player !!");
-			Instantiate(particle, this.transform.position, Quaternion.identity);
+			Destroy(image);
+			Destroy(boxCollider2);
+			particle.Play();
+
 		}
 	}
 }
