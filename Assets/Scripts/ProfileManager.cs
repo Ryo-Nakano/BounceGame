@@ -43,7 +43,7 @@ public class ProfileManager : MonoBehaviour
                    inputField.text == "おっぱい" ||
                    inputField.text == "死ね")
                 {
-                    alertText.text = "No. Please.";
+					alertText.text = "* No. Please.";
                 }
 				else if (inputField.text == "まちだ" ||
                          inputField.text == "たかしま" ||
@@ -57,6 +57,7 @@ public class ProfileManager : MonoBehaviour
                     alertText.text = "『それは顔面。』";
                 }
 				else if (inputField.text == "Meros" ||
+				         inputField.text == "meros" ||
                          inputField.text == "メロス" ||
                          inputField.text == "めろす")//メロスの時
                 {
@@ -101,13 +102,13 @@ public class ProfileManager : MonoBehaviour
                 }
                 else
                 {
-                    alertText.text = "Too Long too Set";
+                    alertText.text = "* Please Set Less Than 6 Characters";
                 }
             }
         }
         else//文字入力してない時
         {
-			alertText.text = "No Characters";
+			alertText.text = "* There Are No Characters";
         }
     }
 }
