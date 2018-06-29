@@ -5,16 +5,11 @@ using UnityEngine.UI;
 
 public class GemScript : MonoBehaviour {
 
-	ParticleSystem particle;
-	Image image;
-	BoxCollider2D boxCollider2;
-    
+	[SerializeField] GameObject particle;//Unityからエフェクトアタッチ
 
 	// Use this for initialization
 	void Start () {
-		particle = this.transform.Find("Destruction01").GetComponent<ParticleSystem>();
-		image = GetComponent<Image>();
-		boxCollider2 = GetComponent<BoxCollider2D>();
+		
 	}
 	
 	// Update is called once per frame
@@ -27,10 +22,18 @@ public class GemScript : MonoBehaviour {
 		if(col.gameObject.tag == "Player")
 		{
 			Debug.Log("Hit Player !!");
-			Destroy(image);
-			Destroy(boxCollider2);
-			particle.Play();
+			Destroy(this.gameObject);
+            
+			float positionX = this.transform.transform.position.x;
+			float positionY = this.transform.transform.position.y;
+			float adjustZ = -Camera.main.transform.position.z;
+            
+			Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(positionX, positionY, adjustZ));
+			p.z = 10f;//ちょっとz前に出す
+			Debug.Log("p : " + p);
 
+			GameObject obj = Instantiate(particle) as GameObject;
+			obj.transform.position = p;
 		}
 	}
 }
