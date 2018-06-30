@@ -22,6 +22,8 @@ public class ManagerScript : MonoBehaviour
 	[SerializeField] Button changeSkinButton;
 	[SerializeField] Button rankingDataButton;
 	[SerializeField] GameObject changeUserNameText;
+	[SerializeField] GameObject rightButton;
+	[SerializeField] GameObject leftButton;
 
 	[SerializeField] GameObject gems;
 	[SerializeField] GameObject gem;//Instantiateする為にUnityからアタッチ
@@ -46,7 +48,7 @@ public class ManagerScript : MonoBehaviour
 	public float timer;
 	float resultTimer;//Result画面に移動するタイミングを測るタイマー
 	[SerializeField] float goResultInterval;//何秒後にResultに移行するか決定する変数
-
+    
 	// Use this for initialization
 	void Start()
 	{
@@ -97,6 +99,8 @@ public class ManagerScript : MonoBehaviour
 				isPlaying = true;
 				if(isPlaying == true)
 				{
+					rightButton.SetActive(true);
+					leftButton.SetActive(true);
 					gems.SetActive(true);//生成後、無効化にしていたgemsを有効化
                     countdownText.text = "";
                     timer += Time.deltaTime;//タイマー開始
@@ -109,6 +113,8 @@ public class ManagerScript : MonoBehaviour
 						gameStart = false;
                         clearText.text = "C L E A R";
                         isResult = true;
+						rightButton.SetActive(false);
+						leftButton.SetActive(false);
                     }
 				}
 			}
@@ -150,6 +156,8 @@ public class ManagerScript : MonoBehaviour
 		remainText.text = "";
 		timeText.text = "";
 		clearText.text = "";
+		rightButton.SetActive(false);
+		leftButton.SetActive(false);
 
 		remain = gems.transform.childCount;//itemの数を変数remainに格納！
 	}

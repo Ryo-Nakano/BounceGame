@@ -6827,6 +6827,8 @@ MonoBehaviour:
   changeSkinButton: {fileID: 1046386195}
   rankingDataButton: {fileID: 379201635}
   changeUserNameText: {fileID: 1104957485}
+  rightButton: {fileID: 1260910115}
+  leftButton: {fileID: 1184023509}
   gems: {fileID: 2135305619}
   gem: {fileID: 1473704106662030, guid: d83909d73ddbd4dc4b00351b28f331a7, type: 2}
   view4: {fileID: 1689979838}
