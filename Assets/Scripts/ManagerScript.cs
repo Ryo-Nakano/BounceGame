@@ -72,7 +72,7 @@ public class ManagerScript : MonoBehaviour
 	void Update()
 	{
 		GameManager();
-		SpaceKey();
+		//SpaceKey();
 	}
 
 	void GameManager()

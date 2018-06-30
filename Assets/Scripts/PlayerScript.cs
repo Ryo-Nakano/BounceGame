@@ -12,6 +12,9 @@ public class PlayerScript : MonoBehaviour {
 	ManagerScript ms;
 	RectTransform rt;
 
+	bool rNow = false;//RightButtonが押されている間true
+	bool lNow = false;//LeftButtonが押されている間true
+
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D>();//変数rb2dの中にRigidbody2dを格納しておく！
@@ -35,7 +38,18 @@ public class PlayerScript : MonoBehaviour {
             float x = Input.GetAxisRaw("Horizontal");
             rt.localPosition += new Vector3(x * speed * Time.deltaTime, 0, 0);
 		}
-        
+
+        //Buttonでの操作
+		if(rNow == true && lNow == false)//RightButtonだけが押されている時
+		{
+			rt.localPosition += new Vector3(speed * Time.deltaTime, 0, 0);//右に進む
+			Debug.Log("Go Right!!");
+		}
+		else if(rNow == false && lNow == true)//LeftButtonだけが押されている時
+		{
+			rt.localPosition += new Vector3(-speed * Time.deltaTime, 0, 0);//左に進む
+			Debug.Log("Go Left!!");
+		}
 	}
 
 
@@ -56,4 +70,28 @@ public class PlayerScript : MonoBehaviour {
 			ms.remain--;
 		}
 	}
+
+    //RightButton押された時に呼ばれる関数
+	public void RightButtonDown()
+	{
+		rNow = true;
+	}
+
+    //RightButtonが離された瞬間に呼ばれる関数
+	public void RightButtonUp()
+	{
+		rNow = false;
+	}
+
+	//LeftButton押された時に呼ばれる関数
+    public void LeftButtonDown()
+    {
+		lNow = true;
+    }
+
+	//LeftButtonが離された瞬間に呼ばれる関数
+	public void LeftButtonUp()
+    {
+		lNow = false;
+    }
 }
